@@ -34,31 +34,21 @@ function initializeUser(){
             userInfo.usedBefore = true;
             fs.writeFileSync('./userInfo.json', JSON.stringify(userInfo));
         });
+    } else {
+        console.log(chalk.white(figlet.textSync('Welcome   back,     ' + userInfo.name + '!')));
     }
 }
 
 function welcomeUser(){
-    console.log(chalk.green('Welcome ' + userInfo.name + '!'));
-    console.log(chalk.green('Let\'s get started!'));
-    console.log(chalk.green('Type "help" to see a list of commands.'));
-    console.log(chalk.green('Type "exit" to exit the program.'));
-    console.log(chalk.green('Type "clear" to clear the screen.'));
+    console.log(chalk.green('Type ') + chalk.red("help") + chalk.green(' to see a list of commands.'));
+    console.log(chalk.green('Type ') + chalk.red("exit") + chalk.green(' to exit the program.'));
+    console.log(chalk.green('Type ') + chalk.red("clear") + chalk.green(' to clear the screen.'));
 
     //wait for user's input
     process.stdin.on('data', function(data){
         let input = data.toString().trim();
         if(input === 'help'){
-            console.log(chalk.green('Here are the commands:'));
-            console.log(chalk.green('help - displays a list of commands'));
-            console.log(chalk.green('clear - clears the screen'));
-            console.log(chalk.green('exit - exits the program'));
-            console.log(chalk.green('add - adds a new todo'));
-            console.log(chalk.green('list - lists all todos'));
-            console.log(chalk.green('delete - deletes a todo'));
-            console.log(chalk.green('complete - completes a todo'));
-            console.log(chalk.green('incomplete - incomplete a todo'));
-            console.log(chalk.green('edit - edits a todo'));
-            console.log(chalk.green('help - displays this list of commands'));
+            displayCommands();
         }
         else if(input === 'clear'){
             console.clear();
@@ -71,5 +61,12 @@ function welcomeUser(){
             console.log(chalk.red('Invalid command. Type "help" to see a list of commands.'));
         }
     });
+}
+
+function displayCommands(){
+    console.log(chalk.green('Here are the commands:'));
+    console.log(chalk.green('help - displays a list of commands'));
+    console.log(chalk.green('clear - clears the screen'));
+    console.log(chalk.green('exit - exits the program'));
 }
 
